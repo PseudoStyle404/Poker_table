@@ -28,6 +28,8 @@ for i in range(len(Joueurs)):
 def main_de_poker():
 #for i in range(1): #joue une main de POKER
     #DEMMARRE un JEUX et TIRE 2 + 5 CARTES avec N JOUEUR
+    bouton_start.pack_forget()
+
     games = Jeux.games_init(nb_joueurs) #creation de toutes les cartes
     Cartes_Joueurs = games[0]#liste des mains des joueurs
     flop=games[1]#flop
