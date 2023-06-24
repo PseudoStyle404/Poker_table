@@ -54,7 +54,7 @@ def start_game():
     Tables_1.current_player=(nb_dealer+3) % nb_joueurs   # integer pour numero du joueur ex : 1 a 6
     # fin des blind
 
-    #main.MAJ_TOUT()
+    main.MAJ_TOUT()
     if True:
         # print("-----------------------------")
         # for i in range(nb_joueurs):
@@ -87,7 +87,7 @@ def raise_play():
     while not Joueurs[Tables_1.current_player].in_game:
         Tables_1.current_player=(Tables_1.current_player+1) % nb_joueurs  # on incremente numero joueurs
 
-    #main.MAJ_TOUT()
+    main.MAJ_TOUT()
     return
 
 
@@ -106,7 +106,7 @@ def call_play():
     Tables_1.pot += diff_call
     Tables_1.current_player = (Tables_1.current_player + 1) % nb_joueurs  # on incremente numero joueurs
 
-    #main.MAJ_TOUT()
+    main.MAJ_TOUT()
     return
 
 
@@ -116,5 +116,5 @@ def fold_play():
     Joueurs[Tables_1.current_player].cartes = ["Xx", "Xx"]
     Tables_1.current_player = (Tables_1.current_player + 1) % nb_joueurs  # on incremente numero joueurs
 
-    #main.MAJ_TOUT()
+    main.MAJ_TOUT()
     return
