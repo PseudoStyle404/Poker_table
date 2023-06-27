@@ -21,6 +21,7 @@ class class_table:
 # Joueur_data = [True, 0, [Stack_init,0], ["Xx", "Xx"], 0, 0]
 
 
+
 class class_joueurs:
     def __init__(self, in_game, position, stack, cartes, force1, force2):
         self.name="J"+str(position+1)
@@ -36,4 +37,5 @@ class class_joueurs:
                f" force1: {self.force1}, force2: {self.force2}"
 
 # Joueur_data = [True, 0, [Stack_init,0], ["Xx", "Xx"], 0, 0]
+
 

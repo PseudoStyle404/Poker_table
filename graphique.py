@@ -1,5 +1,10 @@
 import tkinter as tk
+
+import Jeux
+import initialisation
 import action_joueur
+
+
 # Fonction pour créer un conteneur avec des paramètres spécifiques
 def create_container(parent, row, column, bg_color):
     container = tk.Frame(parent, bg=bg_color, highlightthickness=0.2)
@@ -13,150 +18,117 @@ def create_label(container, textvariable, font, fg, bg, borderwidth, relief):
                     borderwidth=borderwidth, relief=relief)
 
 
-def window(Table_Poker):
-    string_vars = [
-        tk.StringVar(Table_Poker) for _ in range(27)
-    ]
-    (
-        Lt_pot_total, Lt_current_player,
-        Lt_money_J1, Lt_money_J2, Lt_money_J3, Lt_money_J4, Lt_money_J5, Lt_money_J6,
-        Lt_money2_J1, Lt_money2_J2, Lt_money2_J3, Lt_money2_J4, Lt_money2_J5, Lt_money2_J6, Lt_couleur_variable,
-        Lt_J1_carte1, Lt_J1_carte2,
-        Lt_J2_carte1, Lt_J2_carte2,
-        Lt_J3_carte1, Lt_J3_carte2,
-        Lt_J4_carte1, Lt_J4_carte2,
-        Lt_J5_carte1, Lt_J5_carte2,
-        Lt_J6_carte1, Lt_J6_carte2
-    ) = string_vars[:27]
+def ajuster_conteneurs(event):
+    largeur_fenetre = event.width
+    hauteur_fenetre = event.height
 
-    conteneur1 = create_container(Table_Poker, 1, 1, "#008000")
-    conteneur2 = create_container(Table_Poker, 1, 0, "#6B8E23")
-    conteneur3 = create_container(Table_Poker, 0, 0, "#008000")
-    conteneur4 = create_container(Table_Poker, 0, 1, "#6B8E23")
-    conteneur5 = create_container(Table_Poker, 0, 2, "#008000")
-    conteneur6 = create_container(Table_Poker, 1, 2, "#6B8E23")
+    #  Calcule la taille des conteneurs en fonction de la taille de la fenêtre
+    taille_conteneur = largeur_fenetre
+    hauteur_conteneur = hauteur_fenetre
 
-    conteneur_middle = tk.Frame(Table_Poker, bg="white")
-    conteneur_middle.place(relx=0.5, rely=0.4, width=120, height=60, anchor=tk.CENTER)
+    #  Ajuste la taille des conteneurs
+    conteneur1.configure(width=taille_conteneur, height=hauteur_conteneur)
+    conteneur2.configure(width=taille_conteneur, height=hauteur_conteneur)
+    conteneur3.configure(width=taille_conteneur, height=hauteur_conteneur)
+    conteneur4.configure(width=taille_conteneur, height=hauteur_conteneur)
+    conteneur5.configure(width=taille_conteneur, height=hauteur_conteneur)
+    conteneur6.configure(width=taille_conteneur, height=hauteur_conteneur)
 
-    conteneur_J1 = tk.Frame(conteneur1)
-    conteneur_J2 = tk.Frame(conteneur2)
-    conteneur_J3 = tk.Frame(conteneur3)
-    conteneur_J4 = tk.Frame(conteneur4)
-    conteneur_J5 = tk.Frame(conteneur5)
-    conteneur_J6 = tk.Frame(conteneur6)
 
-    # backgroud_image=Image.open("/table_de_poker.jpg")
-    # backgroud_image=backgroud_image.resize((300,300))
-    # backgroud_image_tk= ImageTk.PhotoImage(backgroud_image)
+Joueurs_dico=initialisation.Joueurs_dico
+Tables_1=initialisation.Tables_1
 
-    # Lt_backgroud=tk.label(Table_Poker,backgroud_image_tk)
-    # Lt_backgroud.pack()
+Table_Poker = tk.Tk()
+Table_Poker.title("Table_Poker")
+Table_Poker.geometry('800x500')
+Table_Poker["bg"]='green'
 
-    #  Configuration des options de mise en page pour les conteneurs
-    Table_Poker.grid_rowconfigure(0, weight=1)
-    Table_Poker.grid_rowconfigure(1, weight=1)
-    Table_Poker.grid_columnconfigure(0, weight=1)
-    Table_Poker.grid_columnconfigure(1, weight=1)
-    Table_Poker.grid_columnconfigure(2, weight=1)
 
-    # Fonction pour créer les labels avec des paramètres communs
+#  Attache l'événement de redimensionnement à la fonction ajuster_conteneurs
+# Table_Poker.bind("<Configure>", ajuster_conteneurs)
+string_vars = [
+    tk.StringVar(Table_Poker) for _ in range(27)
+]
+(
+    Lt_pot_total, Lt_current_player,
+    Lt_money_J1, Lt_money_J2, Lt_money_J3, Lt_money_J4, Lt_money_J5, Lt_money_J6,
+    Lt_money2_J1, Lt_money2_J2, Lt_money2_J3, Lt_money2_J4, Lt_money2_J5, Lt_money2_J6, Lt_couleur_variable,
+    Lt_J1_carte1, Lt_J1_carte2,
+    Lt_J2_carte1, Lt_J2_carte2,
+    Lt_J3_carte1, Lt_J3_carte2,
+    Lt_J4_carte1, Lt_J4_carte2,
+    Lt_J5_carte1, Lt_J5_carte2,
+    Lt_J6_carte1, Lt_J6_carte2
+) = string_vars[:27]
 
-    L_pot_total = create_label(conteneur_middle, Lt_pot_total, ("Arial Bold", 15), 'yellow', 'black', 1, "solid")
-    L_current_player = create_label(conteneur_middle, Lt_current_player, ("Arial Bold", 15), None, None, 1, "solid")
 
-    L_money_J1 = create_label(conteneur1, Lt_money_J1, ("Arial Bold", 15), None, None, 1, "solid")
-    L_money_J2 = create_label(conteneur2, Lt_money_J2, ("Arial Bold", 15), None, None, 1, "solid")
-    L_money_J3 = create_label(conteneur3, Lt_money_J3, ("Arial Bold", 15), None, None, 1, "solid")
-    L_money_J4 = create_label(conteneur4, Lt_money_J4, ("Arial Bold", 15), None, None, 1, "solid")
-    L_money_J5 = create_label(conteneur5, Lt_money_J5, ("Arial Bold", 15), None, None, 1, "solid")
-    L_money_J6 = create_label(conteneur6, Lt_money_J6, ("Arial Bold", 15), None, None, 1, "solid")
+conteneur1 = create_container(Table_Poker, 1, 1, "#008000")
+conteneur2 = create_container(Table_Poker, 1, 0, "#6B8E23")
+conteneur3 = create_container(Table_Poker, 0, 0, "#008000")
+conteneur4 = create_container(Table_Poker, 0, 1, "#6B8E23")
+conteneur5 = create_container(Table_Poker, 0, 2, "#008000")
+conteneur6 = create_container(Table_Poker, 1, 2, "#6B8E23")
 
-    L_money2_J1 = create_label(conteneur1, Lt_money2_J1, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
-    L_money2_J2 = create_label(conteneur2, Lt_money2_J2, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
-    L_money2_J3 = create_label(conteneur3, Lt_money2_J3, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
-    L_money2_J4 = create_label(conteneur4, Lt_money2_J4, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
-    L_money2_J5 = create_label(conteneur5, Lt_money2_J5, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
-    L_money2_J6 = create_label(conteneur6, Lt_money2_J6, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+conteneur_J1 = tk.Frame(conteneur1)
+conteneur_J2 = tk.Frame(conteneur2)
+conteneur_J3 = tk.Frame(conteneur3)
+conteneur_J4 = tk.Frame(conteneur4)
+conteneur_J5 = tk.Frame(conteneur5)
+conteneur_J6 = tk.Frame(conteneur6)
 
-    mise_G = tk.Entry(conteneur1, font=("Arial", 20), bg="white")
+# backgroud_image=Image.open("/table_de_poker.jpg")
+# backgroud_image=backgroud_image.resize((300,300))
+# backgroud_image_tk= ImageTk.PhotoImage(backgroud_image)
 
-    J1_carte1 = create_label(conteneur_J1, Lt_J1_carte1, ("Arial Bold", 20), None, None, 1, "solid")
-    J1_carte2 = create_label(conteneur_J1, Lt_J1_carte2, ("Arial Bold", 20), None, None, 1, "solid")
-    J2_carte1 = create_label(conteneur_J2, Lt_J2_carte1, ("Arial Bold", 15), None, None, 1, "solid")
-    J2_carte2 = create_label(conteneur_J2, Lt_J2_carte2, ("Arial Bold", 15), None, None, 1, "solid")
-    J3_carte1 = create_label(conteneur_J3, Lt_J3_carte1, ("Arial Bold", 15), None, None, 1, "solid")
-    J3_carte2 = create_label(conteneur_J3, Lt_J3_carte2, ("Arial Bold", 15), None, None, 1, "solid")
-    J4_carte1 = create_label(conteneur_J4, Lt_J4_carte1, ("Arial Bold", 15), None, None, 1, "solid")
-    J4_carte2 = create_label(conteneur_J4, Lt_J4_carte2, ("Arial Bold", 15), None, None, 1, "solid")
-    J5_carte1 = create_label(conteneur_J5, Lt_J5_carte1, ("Arial Bold", 15), None, None, 1, "solid")
-    J5_carte2 = create_label(conteneur_J5, Lt_J5_carte2, ("Arial Bold", 15), None, None, 1, "solid")
-    J6_carte1 = create_label(conteneur_J6, Lt_J6_carte1, ("Arial Bold", 15), None, None, 1, "solid")
-    J6_carte2 = create_label(conteneur_J6, Lt_J6_carte2, ("Arial Bold", 15), None, None, 1, "solid")
+# Lt_backgroud=tk.label(Table_Poker,backgroud_image_tk)
+# Lt_backgroud.pack()
 
-    bouton_raise = tk.Button(conteneur1, text="RAISE", bg="red", fg="black", command=action_joueur.raise_play)
-    bouton_call = tk.Button(conteneur1, text="CALL", bg="green", fg="black", command=action_joueur.call_play)
-    bouton_fold = tk.Button(conteneur1, text="FOLD", bg="#556B2F", fg="black", command=action_joueur.fold_play)
-    # bouton_start = tk.Button(conteneur2, text="START", bg="orange", fg="blue")
-    # bouton_refresh = tk.Button(conteneur6, text="REFRESH", bg="orange", fg="blue", command=MAJ_TOUT)
-    bouton_fermer = tk.Button(conteneur6, text="FERMER", bg="orange", fg="blue", command=Table_Poker.destroy)
+#  Configuration des options de mise en page pour les conteneurs
+Table_Poker.grid_rowconfigure(0, weight=1)
+Table_Poker.grid_rowconfigure(1, weight=1)
+Table_Poker.grid_columnconfigure(0, weight=1)
+Table_Poker.grid_columnconfigure(1, weight=1)
+Table_Poker.grid_columnconfigure(2, weight=1)
 
-    # Conteneur 1
+conteneur_middle = tk.Frame(Table_Poker, bg="red")
+conteneur_middle.place(relx=0.5, rely=0.4, width=120, height=35, anchor=tk.CENTER)
 
-    conteneur_J1.pack(side="top")
-    J1_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    J1_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    L_money2_J1.pack()
-    L_money_J1.pack()
-    mise_G.pack(expand=1)
-    bouton_fold.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    bouton_call.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    bouton_raise.pack(side=tk.LEFT, fill=tk.X, expand=True)
+conteneur_middle_play = tk.Frame(Table_Poker, bg="blue")
+conteneur_middle_play.place(relx=0.5, rely=0.85, width=204, height=70, anchor=tk.CENTER)
 
-    # Conteneur 2
-    conteneur_J2.pack(side="top")
-    J2_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    J2_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-    L_money2_J2.pack()
-    L_money_J2.pack()
-    # bouton_start.pack(expand=1)
+L_pot_total = create_label(conteneur_middle, Lt_pot_total, ("Arial Bold", 15), 'yellow', 'black', 1, "solid")
 
-    # Conteneur 3
-    # conteneur_J3.pack(side="top")
-    # J3_carte1.pack()
-    # J3_carte2.pack()
-    # L_money2_J3.pack()
-    # L_money_J3.pack()
+L_money_J1 = create_label(conteneur1, Lt_money_J1, ("Arial Bold", 15), None, None, 1, "solid")
+L_money_J2 = create_label(conteneur2, Lt_money_J2, ("Arial Bold", 15), None, None, 1, "solid")
+L_money_J3 = create_label(conteneur3, Lt_money_J3, ("Arial Bold", 15), None, None, 1, "solid")
+L_money_J4 = create_label(conteneur4, Lt_money_J4, ("Arial Bold", 15), None, None, 1, "solid")
+L_money_J5 = create_label(conteneur5, Lt_money_J5, ("Arial Bold", 15), None, None, 1, "solid")
+L_money_J6 = create_label(conteneur6, Lt_money_J6, ("Arial Bold", 15), None, None, 1, "solid")
 
-    # Conteneur 4
-    # conteneur_J4.pack(side="top")
-    # J4_carte1.pack()
-    # J4_carte2.pack()
-    # L_money2_J4.pack()
-    # L_money_J4.pack()
+Liste_money_Jx=[L_money_J1, L_money_J2, L_money_J3, L_money_J4, L_money_J5, L_money_J6]
 
-    # Conteneur 5
-    # conteneur_J5.pack(side="top")
-    # J5_carte1.pack()
-    # J5_carte2.pack()
-    # L_money2_J5.pack()
-    # L_money_J5.pack()
+L_money2_J1 = create_label(conteneur1, Lt_money2_J1, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+L_money2_J2 = create_label(conteneur2, Lt_money2_J2, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+L_money2_J3 = create_label(conteneur3, Lt_money2_J3, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+L_money2_J4 = create_label(conteneur4, Lt_money2_J4, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+L_money2_J5 = create_label(conteneur5, Lt_money2_J5, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
+L_money2_J6 = create_label(conteneur6, Lt_money2_J6, ("Arial Bold", 12), 'yellow', 'black', 1, "solid")
 
-    # Conteneur 6
-    # conteneur_J6.pack(side="top")
-    # J6_carte1.pack()
-    # J6_carte2.pack()
-    # L_money2_J6.pack()
-    # L_money_J6.pack()
-    # bouton_refresh.pack(expand=1)
-    # bouton_fermer.pack(expand=1)
 
-    # Conteneur middle
-    # L_current_player.pack()
-    # L_pot_total.pack()
+J1_carte1 = create_label(conteneur_J1, Lt_J1_carte1, ("Arial Bold", 20), None, None, 1, "solid")
+J1_carte2 = create_label(conteneur_J1, Lt_J1_carte2, ("Arial Bold", 20), None, None, 1, "solid")
+J2_carte1 = create_label(conteneur_J2, Lt_J2_carte1, ("Arial Bold", 15), None, None, 1, "solid")
+J2_carte2 = create_label(conteneur_J2, Lt_J2_carte2, ("Arial Bold", 15), None, None, 1, "solid")
+J3_carte1 = create_label(conteneur_J3, Lt_J3_carte1, ("Arial Bold", 15), None, None, 1, "solid")
+J3_carte2 = create_label(conteneur_J3, Lt_J3_carte2, ("Arial Bold", 15), None, None, 1, "solid")
+J4_carte1 = create_label(conteneur_J4, Lt_J4_carte1, ("Arial Bold", 15), None, None, 1, "solid")
+J4_carte2 = create_label(conteneur_J4, Lt_J4_carte2, ("Arial Bold", 15), None, None, 1, "solid")
+J5_carte1 = create_label(conteneur_J5, Lt_J5_carte1, ("Arial Bold", 15), None, None, 1, "solid")
+J5_carte2 = create_label(conteneur_J5, Lt_J5_carte2, ("Arial Bold", 15), None, None, 1, "solid")
+J6_carte1 = create_label(conteneur_J6, Lt_J6_carte1, ("Arial Bold", 15), None, None, 1, "solid")
+J6_carte2 = create_label(conteneur_J6, Lt_J6_carte2, ("Arial Bold", 15), None, None, 1, "solid")
 
-    action_joueur.start_game()
-    Table_Poker.mainloop()
+
 
 def MAJ_TOUT():
     # GRAPHIQUE MAJ
@@ -168,6 +140,12 @@ def MAJ_TOUT():
     Lt_money_J4.set(str(Joueurs_dico["J4"].stack[0]))
     Lt_money_J5.set(str(Joueurs_dico["J5"].stack[0]))
     Lt_money_J6.set(str(Joueurs_dico["J6"].stack[0]))
+
+    for i in range(len(Liste_money_Jx)):
+        if Tables_1.current_player==i:
+            Liste_money_Jx[i].configure(bg="red")
+        else:
+            Liste_money_Jx[i].configure(bg="white")
 
     Lt_money2_J1.set(str(Joueurs_dico["J1"].stack[1]))
     Lt_money2_J2.set(str(Joueurs_dico["J2"].stack[1]))
@@ -203,3 +181,70 @@ def MAJ_TOUT():
     J6_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J6"].cartes[1]))
 
     return
+
+
+mise_G = tk.Entry(conteneur_middle_play, font=("Arial", 14), bg="light blue")
+bouton_raise = tk.Button(conteneur_middle_play, text="RAISE", bg="yellow", fg="black",
+                         command=lambda: action_joueur.raise_play(MAJ_TOUT, mise_G))
+bouton_call = tk.Button(conteneur_middle_play, text="CALL", bg="green", fg="black",
+                        command=lambda: action_joueur.call_play(MAJ_TOUT))
+bouton_fold = tk.Button(conteneur_middle_play, text="FOLD", bg="#556B2F", fg="black",
+                        command=lambda: action_joueur.fold_play(MAJ_TOUT))
+# bouton_start = tk.Button(conteneur2, text="START", bg="orange", fg="blue")
+# bouton_refresh = tk.Button(conteneur6, text="REFRESH", bg="orange", fg="blue", command=MAJ_TOUT)
+bouton_fermer = tk.Button(conteneur6, text="FERMER", bg="orange", fg="blue", command=Table_Poker.destroy)
+
+# Conteneur 1
+
+conteneur_J1.pack(side="top")
+J1_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J1_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J1.pack()
+L_money_J1.pack()
+mise_G.pack(expand=1)
+bouton_fold.pack(side=tk.LEFT, expand=True)
+bouton_call.pack(side=tk.LEFT, expand=True)
+bouton_raise.pack(side=tk.LEFT, expand=True)
+
+# Conteneur 2
+conteneur_J2.pack(side="top")
+J2_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J2_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J2.pack()
+L_money_J2.pack()
+
+# Conteneur 3
+conteneur_J3.pack(side="top")
+J3_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J3_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J3.pack()
+L_money_J3.pack()
+
+# Conteneur 4
+conteneur_J4.pack(side="top")
+J4_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J4_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J4.pack()
+L_money_J4.pack()
+
+# Conteneur 5
+conteneur_J5.pack(side="top")
+J5_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J5_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J5.pack()
+L_money_J5.pack()
+
+# Conteneur 6
+conteneur_J6.pack(side="top")
+J6_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+J6_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+L_money2_J6.pack()
+L_money_J6.pack()
+# bouton_fermer.pack(expand=1)
+
+# Conteneur middle
+L_pot_total.pack(expand=True)
+
+
+MAJ_TOUT()
+Table_Poker.mainloop()
