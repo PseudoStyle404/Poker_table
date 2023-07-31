@@ -6,4 +6,4 @@
 
 #Tous les fichiers permetant de créer l'executable de la version 0.1 ont était upload le 31/07/2023 
 
-#l'executable LINUX est le fichier "table_pokerV0.1"
+#l'executable LINUX est le fichier "Table_poker_V0.1"
