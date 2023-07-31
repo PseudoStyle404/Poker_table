@@ -3,3 +3,7 @@ Librairies utilisés:
 - tkinter: Version de tkinter: 8.6.12
 - cProfile
 - pstats
+
+Librairies optionelle:
+
+- pyinstaller
