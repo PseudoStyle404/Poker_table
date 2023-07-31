@@ -1,5 +1,3 @@
-Poker_table
-
 Ce projet personnel vise à ajouter des fonctionnalités à un jeu de poker classique.
 
 Instructions d'exécution :
