@@ -1,5 +1,3 @@
-import tkinter as tk
-
 class class_CST:
     Hauteur = ["A", "R", "D", "J", "T", "9", "8", "7", "6", "5", "4", "3", "2"]
     Couleur = ["c", "a", "p", "t"]
@@ -13,6 +11,10 @@ class class_table:
     def __init__(self):
         self.pot=0
         self.current_player=0
+        self.dealer=0
+        self.temps_jeux="flop"
+        self.check_ok=False
+        self.check_count=0
         self.min_raise=0
 
     def __str__(self):
@@ -37,5 +39,3 @@ class class_joueurs:
                f" force1: {self.force1}, force2: {self.force2}"
 
 # Joueur_data = [True, 0, [Stack_init,0], ["Xx", "Xx"], 0, 0]
-
-
