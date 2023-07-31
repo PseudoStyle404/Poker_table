@@ -4,4 +4,6 @@
 
 #Lancez le main
 
-#Tous les fichiers permetant de faire fonctionner la version 0.1 ont était upload le 31/07/2023 
+#Tous les fichiers permetant de créer l'executable de la version 0.1 ont était upload le 31/07/2023 
+
+#l'executable LINUX est le fichier "table_pokerV0.1"
