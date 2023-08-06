@@ -51,6 +51,7 @@ def distrib_cartes():
     turn = games[2]  # turn
     river = games[3]  # river
     Board = flop + turn + river  # toutes les cartes commune aux joueur
+    print(Board)
 
     # AFFECTATION DES MAINS AUX JOUEURS
     # Cartes_Joueurs[1]=["8p", "Rp"]
@@ -59,6 +60,7 @@ def distrib_cartes():
 
     for i in range(nb_joueurs):
         Joueurs[i].cartes = Cartes_Joueurs[i]
+        Joueurs[i].position = (i-Tables_1.dealer) % nb_joueurs
 
 
     # AFFECTATION SCORE FORCE 1 DES JOUEUR
@@ -80,6 +82,7 @@ def distrib_cartes():
     Tables_1.pot= SB + BB
     Tables_1.current_player=(Tables_1.dealer+3) % nb_joueurs   # integer pour numero du joueur ex : 1 a 6
     # fin des blind
+    print(Joueurs)
     return
 
 

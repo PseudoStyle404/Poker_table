@@ -2,10 +2,9 @@ import time
 
 import initialisation
 
-nb_joueurs= initialisation.nb_joueurs
-Joueurs=initialisation.Joueurs
-Tables_1=initialisation.Tables_1
-Board=initialisation.Board
+nb_joueurs = initialisation.nb_joueurs
+Joueurs = initialisation.Joueurs
+Tables_1 = initialisation.Tables_1
 
 
 def raise_play(MAJ_TOUT, mise_G):
@@ -74,7 +73,9 @@ def call_play(MAJ_TOUT, MAJ_FLOP, MAJ_TURN, MAJ_RIVER, RAZ_BOARD):
         memo= Joueur_prec.stack[1]
         test_call=True
         for i in Joueurs:
-            if i.stack[1]!=memo and i.in_game:
+            if (i.stack[1]!=memo and i.in_game) or (Joueurs[Tables_1.current_player].position != 3
+                                                    and Tables_1.min_raise == initialisation.BB
+                                                    and Tables_1.temps_jeux=="flop"):
                 test_call=False
         if test_call:
             END_TURN=True
@@ -85,17 +86,16 @@ def call_play(MAJ_TOUT, MAJ_FLOP, MAJ_TURN, MAJ_RIVER, RAZ_BOARD):
         Tables_1.check_ok=True
         Tables_1.check_count=0
         if Tables_1.temps_jeux=="flop":
-            MAJ_FLOP(Board)
+            MAJ_FLOP(initialisation.Board)
             Tables_1.temps_jeux = "turn"
         elif Tables_1.temps_jeux=="turn":
-            MAJ_TURN(Board)
+            MAJ_TURN(initialisation.Board)
             Tables_1.temps_jeux = "river"
         elif Tables_1.temps_jeux=="river":
-            MAJ_RIVER(Board)
+            MAJ_RIVER(initialisation.Board)
             Tables_1.temps_jeux = "end"
         elif Tables_1.temps_jeux=="end":
             disribue_pot()
-            time.sleep(2)
             RAZ_BOARD()
             reset_end_main()
             initialisation.distrib_cartes()
@@ -114,7 +114,7 @@ def fold_play(MAJ_TOUT, MAJ_FLOP, MAJ_TURN, MAJ_RIVER, RAZ_BOARD):
         count += 1
 
     Joueurs[Tables_1.current_player].in_game = False
-    Joueurs[Tables_1.current_player].cartes = ["Xx", "Xx"]
+    Joueurs[Tables_1.current_player].cartes = ["back_noir", "back_noir"]
     Tables_1.current_player = (Tables_1.current_player + 1) % nb_joueurs  # on incremente numero joueurs
 
     count=1
@@ -140,17 +140,16 @@ def fold_play(MAJ_TOUT, MAJ_FLOP, MAJ_TURN, MAJ_RIVER, RAZ_BOARD):
         Tables_1.check_ok=True
         Tables_1.check_count=0
         if Tables_1.temps_jeux=="flop":
-            MAJ_FLOP(Board)
+            MAJ_FLOP(initialisation.Board)
             Tables_1.temps_jeux = "turn"
         elif Tables_1.temps_jeux=="turn":
-            MAJ_TURN(Board)
+            MAJ_TURN(initialisation.Board)
             Tables_1.temps_jeux = "river"
         elif Tables_1.temps_jeux=="river":
-            MAJ_RIVER(Board)
+            MAJ_RIVER(initialisation.Board)
 
     if Tables_1.temps_jeux=="end":
         disribue_pot()
-        time.sleep(2)
         RAZ_BOARD()
         reset_end_main()
         initialisation.distrib_cartes()

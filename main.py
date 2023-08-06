@@ -2,6 +2,9 @@ import cProfile
 import pstats
 
 
+
+
+
 if __name__ == '__main__':
     profiler = cProfile.Profile()
     profiler.enable()
@@ -17,7 +20,7 @@ if __name__ == '__main__':
     stats.strip_dirs()
     stats.sort_stats('ncalls')  # Tri des statistiques par nombre d'apelle
 
-    stats.print_stats()
+    # stats.print_stats()
 
     # Afficher les appels de fonction
 

@@ -1,10 +1,9 @@
 import tkinter as tk
-from PIL import ImageTk, Image
+from PIL import Image, ImageTk
 
 import Jeux
 import initialisation
 import action_joueur
-
 
 # Fonction pour créer un conteneur avec des paramètres spécifiques
 def create_container(parent, row, column, bg_color):
@@ -41,7 +40,7 @@ Tables_1=initialisation.Tables_1
 
 Table_Poker = tk.Tk()
 Table_Poker.title("Table_Poker")
-Table_Poker.geometry('1200x720')
+Table_Poker.geometry('1300x800')
 Table_Poker["bg"]='green'
 
 
@@ -101,7 +100,7 @@ conteneur_middle_play = tk.Frame(Table_Poker, bg="#FFE4B5")
 conteneur_middle_play.place(relx=0.5, rely=0.85, width=300, height=70, anchor=tk.CENTER)
 
 conteneur_middle_board = tk.Frame(Table_Poker, bg="green")
-conteneur_middle_board.place(relx=0.5, rely=0.25, width=204, height=50, anchor=tk.CENTER)
+conteneur_middle_board.place(relx=0.5, rely=0.30, width=350, height=90, anchor=tk.CENTER)
 
 L_pot_total = create_label(conteneur_middle, Lt_pot_total, ("Arial Bold", 15), 'yellow', 'black', 1, "solid")
 
@@ -136,26 +135,81 @@ L_money2_J5 = create_label(conteneur_J5, Lt_money2_J5, ("Arial Bold", 15), 'yell
 L_money2_J6 = create_label(conteneur_J6, Lt_money2_J6, ("Arial Bold", 15), 'yellow', 'black', 1, "solid")
 
 
-J1_carte1 = create_label(conteneur_J1, Lt_J1_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J1_carte2 = create_label(conteneur_J1, Lt_J1_carte2, ("Arial Bold", 25), None, None, 1, "solid")
-J2_carte1 = create_label(conteneur_J2, Lt_J2_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J2_carte2 = create_label(conteneur_J2, Lt_J2_carte2, ("Arial Bold", 25), None, None, 1, "solid")
-J3_carte1 = create_label(conteneur_J3, Lt_J3_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J3_carte2 = create_label(conteneur_J3, Lt_J3_carte2, ("Arial Bold", 25), None, None, 1, "solid")
-J4_carte1 = create_label(conteneur_J4, Lt_J4_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J4_carte2 = create_label(conteneur_J4, Lt_J4_carte2, ("Arial Bold", 25), None, None, 1, "solid")
-J5_carte1 = create_label(conteneur_J5, Lt_J5_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J5_carte2 = create_label(conteneur_J5, Lt_J5_carte2, ("Arial Bold", 25), None, None, 1, "solid")
-J6_carte1 = create_label(conteneur_J6, Lt_J6_carte1, ("Arial Bold", 25), None, None, 1, "solid")
-J6_carte2 = create_label(conteneur_J6, Lt_J6_carte2, ("Arial Bold", 25), None, None, 1, "solid")
+def create_label_image(root,text_card):
+    # Charger l'image à afficher
+    path_card="data_image/Jeux_52cartes/"+text_card+".png"
+    image = Image.open(path_card)
+    photo = ImageTk.PhotoImage(image)
+
+    image_redimensionnee = image.resize((60, 90))
+    photo = ImageTk.PhotoImage(image_redimensionnee)
+
+    # Créer un nouveau label avec l'image
+    label_image = tk.Label(root, image=photo)
+    label_image.photo = photo  # Pour éviter que la référence à la photo soit perdue
+    return label_image, photo
 
 
-Board_carte1 = create_label(conteneur_middle_board, Lt_board_carte1, ("Arial Bold", 20), None, None, 1, "solid")
-Board_carte2 = create_label(conteneur_middle_board, Lt_board_carte2, ("Arial Bold", 20), None, None, 1, "solid")
-Board_carte3 = create_label(conteneur_middle_board, Lt_board_carte3, ("Arial Bold", 20), None, None, 1, "solid")
-Board_carte4 = create_label(conteneur_middle_board, Lt_board_carte4, ("Arial Bold", 20), None, None, 1, "solid")
-Board_carte5 = create_label(conteneur_middle_board, Lt_board_carte5, ("Arial Bold", 20), None, None, 1, "solid")
+# Conteneur 1
+conteneur_J1.pack(side="top")
+L_money2_J1.pack()
+lb_joueur1_c1 = create_label_image(conteneur_J1, Joueurs_dico["J1"].cartes[0])[0]
+lb_joueur1_c2 = create_label_image(conteneur_J1, Joueurs_dico["J1"].cartes[1])[0]
+lb_joueur1_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur1_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J1.pack()
 
+# Conteneur 2
+conteneur_J2.pack(side="top")
+L_money2_J2.pack()
+lb_joueur2_c1 = create_label_image(conteneur_J2, Joueurs_dico["J2"].cartes[0])[0]
+lb_joueur2_c2 = create_label_image(conteneur_J2, Joueurs_dico["J2"].cartes[1])[0]
+lb_joueur2_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur2_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J2.pack()
+
+# Conteneur 3
+conteneur_J3.pack(side="top")
+L_money2_J3.pack()
+lb_joueur3_c1 = create_label_image(conteneur_J3, Joueurs_dico["J3"].cartes[0])[0]
+lb_joueur3_c2 = create_label_image(conteneur_J3, Joueurs_dico["J3"].cartes[1])[0]
+lb_joueur3_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur3_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J3.pack()
+
+# Conteneur 4
+conteneur_J4.pack(side="top")
+L_money2_J4.pack()
+lb_joueur4_c1 = create_label_image(conteneur_J4, Joueurs_dico["J4"].cartes[0])[0]
+lb_joueur4_c2 = create_label_image(conteneur_J4, Joueurs_dico["J4"].cartes[1])[0]
+lb_joueur4_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur4_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J4.pack()
+
+# Conteneur 5
+conteneur_J5.pack(side="top")
+L_money2_J5.pack()
+lb_joueur5_c1 = create_label_image(conteneur_J5, Joueurs_dico["J5"].cartes[0])[0]
+lb_joueur5_c2 = create_label_image(conteneur_J5, Joueurs_dico["J5"].cartes[1])[0]
+lb_joueur5_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur5_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J5.pack()
+
+# Conteneur 6
+conteneur_J6.pack(side="top")
+L_money2_J6.pack()
+lb_joueur6_c1 = create_label_image(conteneur_J6, Joueurs_dico["J6"].cartes[0])[0]
+lb_joueur6_c2 = create_label_image(conteneur_J6, Joueurs_dico["J6"].cartes[1])[0]
+lb_joueur6_c1.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+lb_joueur6_c2.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
+L_money_J6.pack()
+
+
+lb_board_carte1 = create_label_image(conteneur_middle_board, "back_rouge")[0]
+lb_board_carte2 = create_label_image(conteneur_middle_board, "back_rouge")[0]
+lb_board_carte3 = create_label_image(conteneur_middle_board, "back_rouge")[0]
+lb_board_carte4 = create_label_image(conteneur_middle_board, "back_rouge")[0]
+lb_board_carte5 = create_label_image(conteneur_middle_board, "back_rouge")[0]
 
 
 def MAJ_TOUT():
@@ -188,32 +242,6 @@ def MAJ_TOUT():
     Lt_money2_J5.set(str(Joueurs_dico["J5"].stack[1]))
     Lt_money2_J6.set(str(Joueurs_dico["J6"].stack[1]))
 
-    Lt_J1_carte1.set(str(Joueurs_dico["J1"].cartes[0]))
-    Lt_J1_carte2.set(str(Joueurs_dico["J1"].cartes[1]))
-    Lt_J2_carte1.set(str(Joueurs_dico["J2"].cartes[0]))
-    Lt_J2_carte2.set(str(Joueurs_dico["J2"].cartes[1]))
-    Lt_J3_carte1.set(str(Joueurs_dico["J3"].cartes[0]))
-    Lt_J3_carte2.set(str(Joueurs_dico["J3"].cartes[1]))
-    Lt_J4_carte1.set(str(Joueurs_dico["J4"].cartes[0]))
-    Lt_J4_carte2.set(str(Joueurs_dico["J4"].cartes[1]))
-    Lt_J5_carte1.set(str(Joueurs_dico["J5"].cartes[0]))
-    Lt_J5_carte2.set(str(Joueurs_dico["J5"].cartes[1]))
-    Lt_J6_carte1.set(str(Joueurs_dico["J6"].cartes[0]))
-    Lt_J6_carte2.set(str(Joueurs_dico["J6"].cartes[1]))
-
-    J1_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J1"].cartes[0]))
-    J1_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J1"].cartes[1]))
-    J2_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J2"].cartes[0]))
-    J2_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J2"].cartes[1]))
-    J3_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J3"].cartes[0]))
-    J3_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J3"].cartes[1]))
-    J4_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J4"].cartes[0]))
-    J4_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J4"].cartes[1]))
-    J5_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J5"].cartes[0]))
-    J5_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J5"].cartes[1]))
-    J6_carte1.config(fg=Jeux.couleur_carte(Joueurs_dico["J6"].cartes[0]))
-    J6_carte2.config(fg=Jeux.couleur_carte(Joueurs_dico["J6"].cartes[1]))
-
     if Tables_1.check_ok:
         bouton_call.config(text="CHECK")
         bouton_raise.config(text="BET")
@@ -222,42 +250,78 @@ def MAJ_TOUT():
         bouton_raise.config(text="RAISE")
 
     MAJ_bouton_dealer()
-    return
 
+    lb_joueur1_c1.configure(image=create_label_image(conteneur_J1, Joueurs_dico["J1"].cartes[0])[1])
+    lb_joueur1_c2.configure(image=create_label_image(conteneur_J1, Joueurs_dico["J1"].cartes[1])[1])
+    lb_joueur2_c1.configure(image=create_label_image(conteneur_J2, Joueurs_dico["J2"].cartes[0])[1])
+    lb_joueur2_c2.configure(image=create_label_image(conteneur_J2, Joueurs_dico["J2"].cartes[1])[1])
+    lb_joueur3_c1.configure(image=create_label_image(conteneur_J3, Joueurs_dico["J3"].cartes[0])[1])
+    lb_joueur3_c2.configure(image=create_label_image(conteneur_J3, Joueurs_dico["J3"].cartes[1])[1])
+    lb_joueur4_c1.configure(image=create_label_image(conteneur_J4, Joueurs_dico["J4"].cartes[0])[1])
+    lb_joueur4_c2.configure(image=create_label_image(conteneur_J4, Joueurs_dico["J4"].cartes[1])[1])
+    lb_joueur5_c1.configure(image=create_label_image(conteneur_J5, Joueurs_dico["J5"].cartes[0])[1])
+    lb_joueur5_c2.configure(image=create_label_image(conteneur_J5, Joueurs_dico["J5"].cartes[1])[1])
+    lb_joueur6_c1.configure(image=create_label_image(conteneur_J6, Joueurs_dico["J6"].cartes[0])[1])
+    lb_joueur6_c2.configure(image=create_label_image(conteneur_J6, Joueurs_dico["J6"].cartes[1])[1])
+
+    return
 
 def MAJ_FLOP(Board):
     # GRAPHIQUE MAJ
-    Lt_board_carte1.set(Board[0])
-    Lt_board_carte2.set(Board[1])
-    Lt_board_carte3.set(Board[2])
-
-    Board_carte1.config(fg=Jeux.couleur_carte(Board[0]))
-    Board_carte2.config(fg=Jeux.couleur_carte(Board[1]))
-    Board_carte3.config(fg=Jeux.couleur_carte(Board[2]))
+    lb_board_carte1.configure(image=create_label_image(conteneur_middle_board, Board[0])[1])
+    lb_board_carte2.configure(image=create_label_image(conteneur_middle_board, Board[1])[1])
+    lb_board_carte3.configure(image=create_label_image(conteneur_middle_board, Board[2])[1])
     return
 
 
 def MAJ_TURN(Board):
-    # GRAPHIQUE MAJ
-    Lt_board_carte4.set(Board[3])
-    Board_carte4.config(fg=Jeux.couleur_carte(Board[3]))
+    lb_board_carte4.configure(image=create_label_image(conteneur_middle_board, Board[3])[1])
     return
 
 
 def MAJ_RIVER(Board):
-    # GRAPHIQUE MAJ
-    Lt_board_carte5.set(Board[4])
-    Board_carte5.config(fg=Jeux.couleur_carte(Board[4]))
+    lb_board_carte5.configure(image=create_label_image(conteneur_middle_board, Board[4])[1])
+    ajouter_labels(Board)
     return
 
 
 def RAZ_BOARD():
-    Lt_board_carte1.set("")
-    Lt_board_carte2.set("")
-    Lt_board_carte3.set("")
-    Lt_board_carte4.set("")
-    Lt_board_carte5.set("")
+    lb_board_carte1.configure(image=create_label_image(conteneur_middle_board, "back_rouge")[1])
+    lb_board_carte2.configure(image=create_label_image(conteneur_middle_board, "back_rouge")[1])
+    lb_board_carte3.configure(image=create_label_image(conteneur_middle_board, "back_rouge")[1])
+    lb_board_carte4.configure(image=create_label_image(conteneur_middle_board, "back_rouge")[1])
+    lb_board_carte5.configure(image=create_label_image(conteneur_middle_board, "back_rouge")[1])
     return
+
+
+historique = tk.Toplevel(conteneur6)
+historique.title("Historique")
+historique.geometry("300x200")  # Définit une taille fixe pour la nouvelle fenêtre
+
+# Liste pour stocker les références des conteneurs
+conteneurs_histo = []
+
+def ajouter_labels(Board):
+    # Créer un nouveau conteneur
+    nouveau_conteneur = tk.Frame(historique, bd=2, relief=tk.SOLID, borderwidth=2)
+    nouveau_conteneur.pack(fill=tk.BOTH, expand=True)
+
+    # Ajouter 5 labels côte à côte dans le nouveau conteneur
+    for i in range(5):
+
+        lb_board_carte = create_label_image(nouveau_conteneur, "back_rouge")[0]
+
+        lb_board_carte.configure(image=create_label_image(nouveau_conteneur, Board[i])[1])
+        lb_board_carte.pack(side=tk.LEFT, fill=tk.X, expand=True)
+
+
+    conteneurs_histo.append(nouveau_conteneur)
+
+    # Si la liste des conteneurs dépasse 5 éléments, supprimer le premier conteneur
+    if len(conteneurs_histo) > 5:
+        conteneur_a_supprimer = conteneurs_histo.pop(0)
+        conteneur_a_supprimer.destroy()
+
 
 
 def placer_bouton_dealer(tk_label, text, color):
@@ -312,64 +376,23 @@ bouton_fold = tk.Button(conteneur_middle_play, text="FOLD", bg="#556B2F", fg="bl
 # bouton_refresh = tk.Button(conteneur6, text="REFRESH", bg="orange", fg="blue", command=MAJ_TOUT)
 bouton_fermer = tk.Button(conteneur6, text="FERMER", bg="orange", fg="blue", command=Table_Poker.destroy)
 
-# Conteneur 1
-
-conteneur_J1.pack(side="top")
-L_money2_J1.pack()
-J1_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J1_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J1.pack()
 mise_G.pack(expand=1)
 mise_G.focus()
 bouton_fold.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
 bouton_call.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
 bouton_raise.pack(side=tk.LEFT, expand=True, fill=tk.BOTH)
 
-# Conteneur 2
-conteneur_J2.pack(side="top")
-L_money2_J2.pack()
-J2_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J2_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J2.pack()
-
-# Conteneur 3
-conteneur_J3.pack(side="top")
-L_money2_J3.pack()
-J3_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J3_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J3.pack()
-
-# Conteneur 4
-conteneur_J4.pack(side="top")
-L_money2_J4.pack()
-J4_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J4_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J4.pack()
-
-# Conteneur 5
-conteneur_J5.pack(side="top")
-L_money2_J5.pack()
-J5_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J5_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J5.pack()
-
-# Conteneur 6
-conteneur_J6.pack(side="top")
-L_money2_J6.pack()
-J6_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-J6_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-L_money_J6.pack()
 # bouton_fermer.pack(expand=1)
 
 # Conteneur middle
 L_pot_total.pack(expand=True)
 
 # Conteneur board
-Board_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
-Board_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
-Board_carte3.pack(side=tk.LEFT, fill=tk.X, expand=True)
-Board_carte4.pack(side=tk.LEFT, fill=tk.X, expand=True)
-Board_carte5.pack(side=tk.LEFT, fill=tk.X, expand=True)
+lb_board_carte1.pack(side=tk.LEFT, fill=tk.X, expand=True)
+lb_board_carte2.pack(side=tk.LEFT, fill=tk.X, expand=True)
+lb_board_carte3.pack(side=tk.LEFT, fill=tk.X, expand=True)
+lb_board_carte4.pack(side=tk.LEFT, fill=tk.X, expand=True)
+lb_board_carte5.pack(side=tk.LEFT, fill=tk.X, expand=True)
 
 MAJ_TOUT()
 Table_Poker.mainloop()
